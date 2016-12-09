@@ -1,14 +1,19 @@
-list = [6, 3, 5, 1, 2, 1, 4]
+# Nathaniel Yearwood (100559609)
+# CSCI3055U Final - Dijkstra's Algorithm
 
-puts list
 
-list.each do
-	for i in 0..list.length-2
-		if list[i] > list[i+1]
-			list[i], list[i+1] = list[i+1], list[i]
+test = [5, 7, 3, 1, 9, 4]
+def sort (list) #function to sort list of given numbers
+	list.each do
+		for i in 0..list.length-2
+			if list[i] > list[i+1]
+				list[i], list[i+1] = list[i+1], list[i]
+			end
 		end
 	end
+	return list
 end
 
+test = sort(test)
 
-puts "\nSorted:\n", list
+puts test
