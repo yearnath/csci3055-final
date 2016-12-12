@@ -27,13 +27,42 @@ class Node
 
 end
 
-#testing nodes
+#creates nodes
 a = Node.new('a')
 b = Node.new('b')
-a.addEdge(b, 5)
+c = Node.new('c')
+d = Node.new('d')
+e = Node.new('e')
+f = Node.new('f')
+g = Node.new('g')
+
+#links nodes bidirectionally as weighted edges
+a.addEdge(b, 4)
+a.addEdge(c, 3)
+a.addEdge(e, 7)
+
+b.addEdge(c, 6)
+b.addEdge(d, 5)
+
+c.addEdge(d, 11)
+c.addEdge(e, 8)
+
+d.addEdge(e, 2)
+d.addEdge(f, 2)
+d.addEdge(g, 10)
+
+e.addEdge(g, 5)
+
+f.addEdge(g, 3)
+
+#prints nodes and number of edges to verify
 puts a
 puts b
-
+puts c
+puts d
+puts e
+puts f
+puts g
 
 
 test = [5, 7, 3, 1, 9, 4]
