@@ -1,22 +1,6 @@
 # Nathaniel Yearwood (100559609)
 # CSCI3055U Final - Dijkstra's Algorithm
 
-test = [5, 7, 3, 1, 9, 4]
-def sort (list) #function to sort list of given numbers
-	list.each do
-		for i in 0..list.length-2
-			if list[i] > list[i+1]
-				list[i], list[i+1] = list[i+1], list[i]
-			end
-		end
-	end
-	return list
-end
-
-test = sort(test)
-
-# puts test
-
 # nodes on graph
 class Node
 
@@ -81,6 +65,7 @@ def djk(graph, start)
 		graph[i].setDist(inf)
 		graph[i].setPrev('none')
 
+		#destination/start node has 0 cost to get to self
 		start.setDist(0)
 
 		#creates list of nodes for calculation
@@ -91,7 +76,7 @@ def djk(graph, start)
 	while q.length > 0
 		
 		shortestDist = inf
-		
+
 		#finds closest node
 		for x in q
 			if x.dist < shortestDist
@@ -99,11 +84,9 @@ def djk(graph, start)
 				u = x
 			end
 		end
-		puts q, "\n"
 		q.delete(u)
-		puts q, "\n\n\n"
 
-		
+		#goes through and finds shortest distance edge
 		for v in u.edges
 			if q.include?(v[0])
 
