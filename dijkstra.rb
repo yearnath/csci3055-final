@@ -1,8 +1,23 @@
 # Nathaniel Yearwood (100559609)
 # CSCI3055U Final - Dijkstra's Algorithm
 
+test = [5, 7, 3, 1, 9, 4]
+def sort (list) #function to sort list of given numbers
+	list.each do
+		for i in 0..list.length-2
+			if list[i] > list[i+1]
+				list[i], list[i+1] = list[i+1], list[i]
+			end
+		end
+	end
+	return list
+end
 
-# nodes of graph
+test = sort(test)
+
+# puts test
+
+# nodes on graph
 class Node
 
 	def initialize (name)
@@ -21,20 +36,101 @@ class Node
 		@edges.push([node, dist])
 	end
 
+	def setDist (dist)
+		@dist = dist
+	end
+
+	def dist
+		@dist
+	end
+
+	def setPrev (prev)
+		@prev = prev
+	end
+
+	def prev
+		@prev
+	end
+
+	#accessor for name
+	def name
+		@name
+	end
+
+	#accessor for edges
+	def edges
+		@edges
+	end
+
 	def to_s
 		'Node: '+ @name + '      Edges: ' + @edges.length.to_s
 	end
 
 end
 
-#creates nodes
-a = Node.new('a')
-b = Node.new('b')
-c = Node.new('c')
-d = Node.new('d')
-e = Node.new('e')
-f = Node.new('f')
-g = Node.new('g')
+
+def djk(graph, start)
+
+	q = []
+	inf = 1.0/0.0
+
+	#alters graph list to include dist from start
+	for i in 0.. graph.length-1
+
+		#gives more information on each node
+		graph[i].setDist(inf)
+		graph[i].setPrev('none')
+
+		start.setDist(0)
+
+		#creates list of nodes for calculation
+		q.push(graph[i])
+	end
+
+
+	while q.length > 0
+		
+		shortestDist = inf
+		
+		#finds closest node
+		for x in q
+			if x.dist < shortestDist
+				shortestDist = x.dist
+				u = x
+			end
+		end
+		puts q, "\n"
+		q.delete(u)
+		puts q, "\n\n\n"
+
+		
+		for v in u.edges
+			if q.include?(v[0])
+
+				alt = u.dist + v[1]
+
+				if alt < v[1]
+					v.setDist = alt
+					v.setPrev = u
+				end
+			end
+		end
+
+	end
+
+	puts start.prev
+end
+
+
+graph = []
+#creates nodes and adds them to graph list
+graph.push(a = Node.new('a'))
+graph.push(b = Node.new('b'))
+graph.push(c = Node.new('c'))
+graph.push(d = Node.new('d'))
+graph.push(e = Node.new('e'))
+graph.push(f = Node.new('f'))
+graph.push(g = Node.new('g'))
 
 #links nodes bidirectionally as weighted edges
 a.addEdge(b, 4)
@@ -56,27 +152,4 @@ e.addEdge(g, 5)
 f.addEdge(g, 3)
 
 #prints nodes and number of edges to verify
-puts a
-puts b
-puts c
-puts d
-puts e
-puts f
-puts g
-
-
-test = [5, 7, 3, 1, 9, 4]
-def sort (list) #function to sort list of given numbers
-	list.each do
-		for i in 0..list.length-2
-			if list[i] > list[i+1]
-				list[i], list[i+1] = list[i+1], list[i]
-			end
-		end
-	end
-	return list
-end
-
-test = sort(test)
-
-# puts test
+djk(graph, a)
