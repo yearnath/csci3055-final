@@ -63,7 +63,7 @@ def djk(graph, start)
 
 		#gives more information on each node
 		graph[i].setDist(inf)
-		graph[i].setPrev('none')
+		graph[i].setPrev('undefined')
 
 		#destination/start node has 0 cost to get to self
 		start.setDist(0)
@@ -84,7 +84,9 @@ def djk(graph, start)
 				u = x
 			end
 		end
+		puts q, "\n"
 		q.delete(u)
+		puts q, "\n\n\n"
 
 		#goes through and finds shortest distance edge
 		for v in u.edges
@@ -92,9 +94,9 @@ def djk(graph, start)
 
 				alt = u.dist + v[1]
 
-				if alt < v[1]
-					v.setDist = alt
-					v.setPrev = u
+				if alt <= v[1]
+					v[0].setDist(alt)
+					v[0].setPrev(u)
 				end
 			end
 		end
